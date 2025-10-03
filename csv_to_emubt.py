@@ -2,6 +2,15 @@ import xml.etree.ElementTree as ET
 from pathlib import Path
 import csv, re, sys
 
+# --- lightweight GUI (stdlib) -----------------------------------------------
+try:
+    import tkinter as tk
+    from tkinter import filedialog, messagebox
+except Exception:
+    tk = None
+    filedialog = None
+    messagebox = None
+
 CSV_SUFFIX = "__"  # <emubt_stem>__<symbol_name>.csv
 
 def _sanitize(name: str) -> str:
@@ -131,7 +140,54 @@ def script_dir() -> Path:
     # Use the EXE’s folder when frozen; otherwise the .py’s folder
     return Path(sys.executable).parent if getattr(sys, "frozen", False) else Path(__file__).parent
 
+# --- GUI helpers -------------------------------------------------------------
+def pick_folder_gui(default_dir: Path | None = None) -> Path | None:
+    """Show a native folder chooser and return a Path or None if cancelled."""
+    if tk is None or filedialog is None:
+        return None
+    root = tk.Tk()
+    root.withdraw()
+    root.update_idletasks()
+    initialdir = str(default_dir) if default_dir and default_dir.exists() else str(script_dir())
+    folder = filedialog.askdirectory(title="Select folder with CSVs and .emubt", initialdir=initialdir)
+    root.destroy()
+    return Path(folder) if folder else None
+
+def show_message(title: str, text: str):
+    if messagebox is not None and tk is not None:
+        try:
+            r = tk.Tk(); r.withdraw()
+            messagebox.showinfo(title, text)
+            r.destroy()
+            return
+        except Exception:
+            pass
+    print(f"[{title}] {text}")
+
+def main():
+    # Prefer CLI arg if provided; otherwise prompt with GUI
+    folder: Path | None = None
+    if len(sys.argv) >= 2:
+        folder = Path(sys.argv[1])
+
+    if folder is None or not folder.exists():
+        folder = pick_folder_gui(default_dir=script_dir())
+
+    if folder is None or not folder.exists():
+        show_message("Cancelled", "No folder selected.")
+        return
+
+    # Start immediately after selection
+    outputs = reencode_csvs_to_emubt(folder, out_prefix="altered_")
+
+    # Summarize
+    if outputs:
+        lines = [f"Saved {len(outputs)} file(s):"] + [f"• {p.name}" for p in outputs[:10]]
+        if len(outputs) > 10:
+            lines.append(f"...and {len(outputs)-10} more.")
+        show_message("Done", "\n".join(lines))
+    else:
+        show_message("Done", "No changes saved. (See log messages for details.)")
+
 if __name__ == "__main__":
-    folder = script_dir()  # <-- scans the EXE’s own directory when packaged
-    print(f"Re-encoding CSVs in: {folder}")
-    reencode_csvs_to_emubt(folder, out_prefix="altered_")
+    main()

@@ -379,6 +379,34 @@
    'C:\\Users\\Craig '
    'UHES\\AppData\\Local\\Programs\\Python\\Python310\\lib\\threading.py',
    'PYMODULE'),
+  ('tkinter',
+   'C:\\Users\\Craig '
+   'UHES\\AppData\\Local\\Programs\\Python\\Python310\\lib\\tkinter\\__init__.py',
+   'PYMODULE'),
+  ('tkinter.commondialog',
+   'C:\\Users\\Craig '
+   'UHES\\AppData\\Local\\Programs\\Python\\Python310\\lib\\tkinter\\commondialog.py',
+   'PYMODULE'),
+  ('tkinter.constants',
+   'C:\\Users\\Craig '
+   'UHES\\AppData\\Local\\Programs\\Python\\Python310\\lib\\tkinter\\constants.py',
+   'PYMODULE'),
+  ('tkinter.dialog',
+   'C:\\Users\\Craig '
+   'UHES\\AppData\\Local\\Programs\\Python\\Python310\\lib\\tkinter\\dialog.py',
+   'PYMODULE'),
+  ('tkinter.filedialog',
+   'C:\\Users\\Craig '
+   'UHES\\AppData\\Local\\Programs\\Python\\Python310\\lib\\tkinter\\filedialog.py',
+   'PYMODULE'),
+  ('tkinter.messagebox',
+   'C:\\Users\\Craig '
+   'UHES\\AppData\\Local\\Programs\\Python\\Python310\\lib\\tkinter\\messagebox.py',
+   'PYMODULE'),
+  ('tkinter.simpledialog',
+   'C:\\Users\\Craig '
+   'UHES\\AppData\\Local\\Programs\\Python\\Python310\\lib\\tkinter\\simpledialog.py',
+   'PYMODULE'),
   ('token',
    'C:\\Users\\Craig '
    'UHES\\AppData\\Local\\Programs\\Python\\Python310\\lib\\token.py',
