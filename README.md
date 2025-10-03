@@ -1,6 +1,6 @@
 # EMUBT Table Export / Re-ingest Tools
 
-These are two small utilities for working with `.emubt` files that contain XML-encoded tables.
+These are two small utilities for working with `.emubt` files that contain XML-encoded tables. The .exe files are located in the 'dist' folder.
 
 ---
 
