@@ -4,25 +4,25 @@ These are two small utilities for working with `.emubt` files that contain XML-e
 
 ---
 
-## 1. `emubt_export`
+## 1. `emubt_to_csv.exe`
 
 **Purpose:**  
-Scans for `.emubt` files in the same folder as the program and exports each `<symbol>` table to a CSV file.
+Scans for `.emubt` files in the specified folder and exports each table to a CSV file.
 
 **Details:**
-- Output CSVs are named:  <emubt_filename_stem>__<symbol_name>.csv
+- Output CSVs are named:  <your_table_filename>__<ecumaster_table_name>.csv
 
 - Tables are written out as a grid, either in decimal or hex format (default = decimal).
 - The original `.emubt` files are never modified.
 
 **Usage:**
-- Place `emubt_export.exe` in the same folder as your `.emubt` files.  
-- Run it (double-click or from command line).  
+- Run emubt_to_csv.exe (double-click or from command line).
+- Enter the emubt folder path into the pop-up and press enter, or navigate traditionally.
 - CSVs will appear alongside the `.emubt` files.
 
 ---
 
-## 2. `emubt_reingest`
+## 2. `csv_to_emubt.exe`
 
 **Purpose:**  
 Reads CSVs exported in the format above and re-encodes them back into `.emubt` files.
@@ -35,18 +35,17 @@ Reads CSVs exported in the format above and re-encodes them back into `.emubt` f
 - Only updates symbols where valid CSVs are found.
 
 **Usage:**
-- Place `emubt_reingest.exe` in the same folder as the `.emubt` files and CSVs.  
-- Run it.  
+- Run 'csv_to_emubt.exe'
+- Enter the emubt folder path into the pop-up and press enter, or navigate traditionally.
 - Altered `.emubt` files will be written with the `altered_` prefix.
 
 ---
 
 ## Notes
 
-- Both tools automatically detect the folder they live in.  
 - Only `.emubt` files in the same directory are processed.  
 - The original `.emubt` files are never overwritten—output uses new filenames.  
 - Works when packaged as `.exe` with PyInstaller.  
-
+- Tested on EMU Black v2
 ---
 
